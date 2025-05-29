@@ -1,21 +1,21 @@
 const Header = ({ activeTab, setActiveTab }) => {
-  const tabs = ['links', 'preview', 'profile'];
+  const tabs = ['links', 'profile', 'preview'];
   return (
-    <div>
-      {tabs.map((tab) => (
-        <button
-          key={tab}
-          onClick={() => setActiveTab(tab)}
-          style={{
-            fontWeight: activeTab === tab ? 'bold' : 'normal',
-            margin: '0 10px',
-            padding: '5px 10px',
-            cursor: 'pointer',
-          }}
-        >
-          {tab.charAt(0).toUpperCase() + tab.slice(1)}
-        </button>
-      ))}
+    <div className='navbar bg-base-100 shadow-sm'>
+      <div className='flex-1'>
+        <a className='btn btn-ghost text-xl'>daisyUI</a>
+      </div>
+      <div className='flex-none'>
+        <ul className='menu menu-horizontal px-1'>
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? 'active' : ''}>
+              <a onClick={() => setActiveTab(tab)}>
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
