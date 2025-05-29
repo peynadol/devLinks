@@ -1,11 +1,11 @@
 import PlatformSelect from './PlatformSelect';
 import LinkInput from './LinkInput';
 
-const LinkCard = ({ formData, onChange }) => {
+const LinkCard = ({ formData, onChange, index, onRemove }) => {
   return (
     <section>
-      <h2>Link 1</h2> {/* dynamically count the link*/}
-      <button>Remove</button> {/* push to far side. removes card from dom */}
+      <h2>{`Link ${index}`}</h2> {/* dynamically count the link*/}
+      <button onClick={onRemove}>Remove</button>{' '}
       <PlatformSelect
         value={formData.platform}
         onChange={(val) => onChange('platform', val)}

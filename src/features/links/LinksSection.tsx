@@ -3,11 +3,17 @@ import EmptyLinks from './EmptyLinks';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 
+//TODO: save button needs to set links in app state
+
 const LinksSection = ({ links, setLinks }) => {
   const [formData, setFormData] = useState({
     platform: '',
     url: '',
   });
+
+  const handleRemoveLink = (id: string) => {
+    setLinks((prev) => prev.filter((link) => link.id !== id));
+  };
 
   const handleAddLink = () => {
     const { platform, url } = formData;
@@ -35,30 +41,32 @@ const LinksSection = ({ links, setLinks }) => {
         world!
       </p>
 
-      <button className='btn' onClick={handleAddLink}>
-        + Add new link
-      </button>
-
       {links.length === 0 ? (
         <EmptyLinks />
       ) : (
-        <ul className='mt-4'>
-          {links.map((link) => (
-            <li key={link.id}>
-              {link.platform}: <a href={link.url}>{link.url}</a>
-            </li>
+        <div className='space-y-4 mt-4'>
+          {links.map((link, index) => (
+            <LinkCard
+              key={link.id}
+              formData={link}
+              readOnly
+              index={index + 1}
+              onRemove={() => handleRemoveLink(link.id)}
+            />
           ))}
-        </ul>
+        </div>
       )}
 
+      <button className='mt-8'>Add a new link</button>
       <LinkCard
         formData={formData}
         onChange={(field, value) =>
           setFormData((prev) => ({ ...prev, [field]: value }))
         }
+        index={links.length + 1}
       />
 
-      <button className='btn btn-secondary mt-4' onClick={handleAddLink}>
+      <button className='btn btn-primary mt-4' onClick={handleAddLink}>
         Save changes
       </button>
     </main>
