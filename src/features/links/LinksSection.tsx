@@ -1,3 +1,4 @@
+import LinkCard from '../../components/linkCard';
 import EmptyLinks from './EmptyLinks';
 
 const LinksSection = ({ links, setLinks }) => {
@@ -10,7 +11,10 @@ const LinksSection = ({ links, setLinks }) => {
         world!
       </p>
       <button className='btn'>+ Add new link</button>
-      {links.length === 0 ? <EmptyLinks /> : <p>links</p>}
+
+      {/* {links.length === 0 ? <EmptyLinks /> : <p>links</p>} */}
+
+      <LinkCard />
     </main>
   );
 };
